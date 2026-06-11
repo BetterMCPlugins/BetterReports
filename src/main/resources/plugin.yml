@@ -1,0 +1,40 @@
+name: BetterReports
+version: ${project.version}
+main: dev.nikhey.betterreports.BetterReportsPlugin
+api-version: '1.21'
+folia-supported: true
+author: Nikhey
+description: Player reports with automatic evidence capture.
+website: https://discord.gg/UfnyJgbY4P
+softdepend: [PlaceholderAPI, DiscordSRV]
+
+commands:
+  report:
+    description: Report a player
+    usage: /report <player> <reason>
+    permission: betterreports.report
+  reports:
+    description: Manage player reports
+    usage: /reports <list|view|claim|unclaim|resolve|dismiss|tp|stats|purge|reload> [args]
+    aliases: [br, betterreports]
+    permission: betterreports.staff
+
+permissions:
+  betterreports.report:
+    description: File player reports
+    default: true
+  betterreports.staff:
+    description: View and handle reports
+    default: op
+  betterreports.notify:
+    description: Receive in-game alerts for new reports
+    default: op
+  betterreports.admin:
+    description: Purge reports and reload the config
+    default: op
+  betterreports.immune:
+    description: Players with this permission can not be reported
+    default: false
+  betterreports.bypass-cooldown:
+    description: File reports without cooldown or open-report limits
+    default: false

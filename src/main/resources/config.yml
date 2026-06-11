@@ -1,0 +1,61 @@
+# BetterReports configuration
+# Every module can be switched off independently - no bloat, no surprises.
+
+reports:
+  # Require a reason after the player name (/report Steve <reason>).
+  require-reason: true
+  # Seconds a player must wait between two reports. 0 = no cooldown.
+  cooldown-seconds: 60
+  # How many unresolved reports one player may have open at the same time. 0 = unlimited.
+  max-open-per-player: 3
+  # Allow reporting players who are currently offline (they must have played before).
+  allow-offline-targets: true
+  # A new report against a target that already has an open report within this
+  # window is merged into it (the report is "bumped") instead of creating a
+  # duplicate. 0 = always create a new report.
+  merge-window-minutes: 15
+  # Suggested reasons, offered as tab completions for /report <player> <tab>.
+  reasons:
+    - Hacking
+    - "Chat abuse"
+    - Griefing
+    - Scamming
+    - "Inappropriate name"
+
+# The USP: evidence is frozen the moment a report is filed, so staff do not
+# have to ask "do you have screenshots?".
+evidence:
+  # Attach recent chat of the reported player and the reporter to the report.
+  chat-history: true
+  # How many chat lines are kept in memory per player (ring buffer, never on disk
+  # until a report actually references them).
+  chat-lines: 30
+  # How many of those lines are attached to a report (newest first, both players merged).
+  snapshot-lines: 20
+
+notify:
+  # Alert online staff (betterreports.notify) when a report is filed or bumped.
+  ingame: true
+  # Tell staff how many reports are open when they join.
+  staff-on-join: true
+
+feedback:
+  # Tell the reporter when their report was handled - immediately if online,
+  # on next join otherwise.
+  notify-reporter: true
+
+discord:
+  # Raw webhook - works without any other plugin.
+  enabled: false
+  webhook-url: ""
+  # DiscordSRV routing - used automatically when DiscordSRV is installed.
+  # channel: the DiscordSRV in-game channel name to post to ("" = main channel).
+  # Tip: if both the webhook and DiscordSRV are enabled, alerts go to both.
+  discordsrv:
+    enabled: true
+    channel: ""
+
+retention:
+  # Resolved/dismissed reports older than this many days are deleted
+  # automatically (open reports are never touched). 0 = keep forever.
+  closed-days: 60
