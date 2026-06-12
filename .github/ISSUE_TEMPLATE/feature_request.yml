@@ -1,0 +1,22 @@
+name: Feature request
+description: An idea that would make BetterReports more useful
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the situation on your server where you missed this feature.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: What should it do?
+    validations:
+      required: true
+  - type: input
+    id: workaround
+    attributes:
+      label: Current workaround
+      description: How do you handle this today, if at all?

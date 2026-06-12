@@ -1,0 +1,30 @@
+name: Bug report
+description: Something broke or behaves wrong
+labels: [bug]
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: BetterReports version, server software and version (e.g. Paper 1.21.4, build 232)
+      placeholder: BetterReports 1.0.0, Paper 1.21.4 #232
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant log output
+      description: Any errors or warnings from the console mentioning BetterReports. Use a paste service for long logs.
+      render: text
+  - type: textarea
+    id: plugins
+    attributes:
+      label: Other plugins involved
+      description: Especially hooked plugins (PlaceholderAPI, DiscordSRV) and anything that touches chat.
