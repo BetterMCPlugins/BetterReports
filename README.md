@@ -79,6 +79,16 @@ Requires Java 21+. The jar lands in `target/BetterReports-<version>.jar`. Drop i
 
 Questions, bug reports, feature ideas — join the [Discord server](https://discord.gg/UfnyJgbY4P) or open a GitHub issue.
 
+## Part of the BetterMCPlugins suite
+
+BetterReports is one of three free, open-source staff plugins that share a design and a planned web dashboard:
+
+- **[BetterAudit](https://github.com/BetterMCPlugins/BetterAudit)** — staff action audit log
+- **[BetterReports](https://github.com/BetterMCPlugins/BetterReports)** — player reports with automatic evidence capture *(this plugin)*
+- **[BetterNotes](https://github.com/BetterMCPlugins/BetterNotes)** — staff notes and a player watchlist
+
+Run them together and the same players, staff and timeline line up across all three.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
@@ -86,6 +96,7 @@ MIT — see [LICENSE](LICENSE).
 ## Roadmap
 
 - Punishment quick-actions on resolve (LiteBans / AdvancedBan integration)
-- Web dashboard, shared with BetterAudit (paid tier)
+- "Add note" on resolve via the [BetterNotes](https://github.com/BetterMCPlugins/BetterNotes) API
+- Web dashboard, shared across the suite (paid tier)
 - Velocity network sync (paid tier)
 - Two-way Discord bot: claim and resolve reports from Discord
