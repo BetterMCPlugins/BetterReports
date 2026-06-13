@@ -6,7 +6,7 @@ folia-supported: true
 author: Nikhey
 description: Player reports with automatic evidence capture.
 website: https://discord.gg/UfnyJgbY4P
-softdepend: [PlaceholderAPI, DiscordSRV]
+softdepend: [PlaceholderAPI, DiscordSRV, BetterNotes]
 
 commands:
   report:

@@ -185,10 +185,34 @@ public final class ReportsCommand implements TabExecutor {
                             .build());
                 }
             }
+            showNotes(sender, r);
             return null;
         }).exceptionally(error -> {
             sender.sendMessage(ReportService.prefixed("Failed to load report #" + id + ".", NamedTextColor.RED));
             return null;
+        });
+    }
+
+    /**
+     * If BetterNotes is installed, appends the target's staff-note count as a
+     * clickable line so staff see prior history without leaving the report.
+     */
+    private void showNotes(CommandSender sender, Report r) {
+        var notes = service.notesHook();
+        if (notes == null) {
+            return;
+        }
+        notes.noteCount(r.targetUuid()).thenAccept(count -> {
+            if (count == null || count <= 0) {
+                return;
+            }
+            sender.sendMessage(Component.text()
+                    .append(Component.text(" Staff notes: ", NamedTextColor.GRAY))
+                    .append(Component.text(count + " on " + r.targetName(), NamedTextColor.AQUA))
+                    .build()
+                    .clickEvent(ClickEvent.runCommand("/notes view " + r.targetName()))
+                    .hoverEvent(Component.text("Click to view notes on " + r.targetName(),
+                            NamedTextColor.AQUA)));
         });
     }
 

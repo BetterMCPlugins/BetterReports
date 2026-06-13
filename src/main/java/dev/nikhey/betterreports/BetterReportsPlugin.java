@@ -49,6 +49,7 @@ public final class BetterReportsPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(menu, this);
 
         registerHooks();
+        service.setNotesHook(dev.nikhey.betterreports.hook.NotesHook.tryResolve(getServer(), getSLF4JLogger()));
 
         PluginCommand report = getCommand("report");
         if (report != null) {

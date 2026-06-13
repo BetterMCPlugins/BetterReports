@@ -36,6 +36,7 @@ BetterReports flips that around:
 |---|---|
 | **PlaceholderAPI** | `%betterreports_open%`, `%betterreports_claimed%`, `%betterreports_unresolved%` — e.g. for staff scoreboards |
 | **DiscordSRV** | Alerts route through your existing DiscordSRV channels — no webhook setup needed |
+| **[BetterNotes](https://github.com/BetterMCPlugins/BetterNotes)** | `/reports view` shows how many staff notes the reported player already has (clickable), and closing a report offers a one-click "add note" shortcut |
 
 ## Commands
 
@@ -96,7 +97,6 @@ MIT — see [LICENSE](LICENSE).
 ## Roadmap
 
 - Punishment quick-actions on resolve (LiteBans / AdvancedBan integration)
-- "Add note" on resolve via the [BetterNotes](https://github.com/BetterMCPlugins/BetterNotes) API
 - Web dashboard, shared across the suite (paid tier)
 - Velocity network sync (paid tier)
 - Two-way Discord bot: claim and resolve reports from Discord

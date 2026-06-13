@@ -42,6 +42,7 @@ public final class ReportService {
     private final Map<UUID, Long> lastReport = new ConcurrentHashMap<>();
     private volatile int openCount;
     private volatile int claimedCount;
+    private volatile dev.nikhey.betterreports.hook.NotesHook notes;
 
     public ReportService(Supplier<Settings> settings, ReportStore store, ChatBuffer chat, Logger logger) {
         this.settings = settings;
@@ -52,6 +53,16 @@ public final class ReportService {
 
     public void addSink(AlertSink sink) {
         sinks.add(sink);
+    }
+
+    /** Wires the optional BetterNotes integration (null = not installed). */
+    public void setNotesHook(dev.nikhey.betterreports.hook.NotesHook notes) {
+        this.notes = notes;
+    }
+
+    /** The BetterNotes bridge, or null when BetterNotes is not installed. */
+    public dev.nikhey.betterreports.hook.NotesHook notesHook() {
+        return notes;
     }
 
     public void file(Player reporter, OfflinePlayer target, String reason) {
@@ -220,6 +231,7 @@ public final class ReportService {
                 }
                 String verb = status == ReportStatus.RESOLVED ? "resolved" : "dismissed";
                 staff.sendMessage(prefixed("Report #" + id + " " + verb + ".", NamedTextColor.GREEN));
+                offerNote(staff, report);
                 notifyStaff(prefixed("Report #" + id + " (" + report.targetName() + ") " + verb
                         + " by " + nameOf(staff)
                         + (note == null || note.isBlank() ? "" : ": " + note), NamedTextColor.GRAY));
@@ -234,6 +246,28 @@ public final class ReportService {
             logger.error("Failed to close report {}", id, error);
             return null;
         });
+    }
+
+    /**
+     * After a report is closed, offers a one-click shortcut to leave a staff
+     * note on the target - only when BetterNotes is installed and the closer is
+     * a player who can add notes. Pure command suggestion; no API call needed.
+     */
+    private void offerNote(CommandSender staff, Report report) {
+        if (notes == null || !(staff instanceof Player player)
+                || !player.hasPermission("betternotes.add")) {
+            return;
+        }
+        staff.sendMessage(Component.text()
+                .append(prefix())
+                .append(Component.text("Leave a staff note on " + report.targetName() + "? ",
+                        NamedTextColor.GRAY))
+                .append(Component.text("[+ note]", NamedTextColor.AQUA)
+                        .clickEvent(net.kyori.adventure.text.event.ClickEvent
+                                .suggestCommand("/notes add " + report.targetName() + " "))
+                        .hoverEvent(Component.text("Suggests /notes add " + report.targetName(),
+                                NamedTextColor.AQUA)))
+                .build());
     }
 
     private void sendReporterFeedback(Report report, String verb, String staffName, long now) {
